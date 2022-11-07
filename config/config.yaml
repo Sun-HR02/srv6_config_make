@@ -17,8 +17,8 @@ srv6_end:
 # srv6 insert 操作
 srv6_insert:
   -
-    ipv6_dstAddr: 2::2
+    ipv6_srcAddr: 2::2
     params: [A2:22::22, 2::2]
   -
-    ipv6_dstAddr: 3::3
+    ipv6_srcAddr: 3::3
     params: [A3:33::33, 3::3]

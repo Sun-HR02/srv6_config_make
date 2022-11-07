@@ -11,6 +11,7 @@ type MatchItem interface {
 type MatchItemImpl struct {
 	Ethernet  string `json:"hdr.ethernet.dst_addr,omitempty"`
 	Ipv6      string `json:"hdr.ipv6.dst_addr,omitempty"`
+	Ipv6Src   string `json:"hdr.ipv6.src_addr,omitempty"`
 	MatchItem `json:"match_item,omitempty"`
 }
 type ActionParamItem interface {
@@ -98,7 +99,7 @@ func BuildTables() []Tables {
 
 	// insert table
 	for _, table := range Srv6_insert_all {
-		dstAddr := table["ipv6_dstaddr"].(string)
+		srcAddr := table["ipv6_srcaddr"].(string)
 		paramsSlice := table["params"].([]interface{})
 
 		params := ActionParamItemImpl{}
@@ -124,8 +125,10 @@ func BuildTables() []Tables {
 			}
 		}
 		srv6InsertTable := TablesImpl{
-			Table:         "ingress.transit_table",
-			Match:         dstAddr,
+			Table: "ingress.transit_table",
+			Match: MatchItemImpl{
+				Ipv6Src: srcAddr,
+			},
 			Action_name:   "ingress.insert_segment_list_" + strconv.Itoa(len(paramsSlice)),
 			Action_params: params,
 		}

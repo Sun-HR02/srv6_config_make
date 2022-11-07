@@ -43,6 +43,7 @@ func ReadConfig() {
 	srv6_insert = viper.Get("srv6_insert").([]interface{})
 	for i := 0; i < len(srv6_insert); i++ {
 		x := srv6_insert[i].(map[string]interface{})
+		//fmt.Println(x["ipv6_srcAddr"])
 		Srv6_insert = append(Srv6_insert, x)
 	}
 
