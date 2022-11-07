@@ -1,0 +1,24 @@
+# ethernet 地址
+ethernet_dstAddr: 08:00:00:00:11:00
+
+# ipv6 转发
+ipv6_routing:
+  - ipv6_dstAddr: 1::1
+    dstMac: 08:00:00:00:01:00
+    port: 1
+  - ipv6_dstAddr: A2:22::22
+    dstMac: 08:00:00:00:22:00
+    port: 2
+
+# srv6 end 操作
+srv6_end:
+  ipv6_dstAddr: [A1:11::11]
+
+# srv6 insert 操作
+srv6_insert:
+  -
+    ipv6_dstAddr: 2::2
+    params: [A2:22::22, 2::2]
+  -
+    ipv6_dstAddr: 3::3
+    params: [A3:33::33, 3::3]
